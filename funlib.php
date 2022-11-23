@@ -1,6 +1,5 @@
 <?php
 require_once("./ejercicios.php");
-
 ?>
 
 <?php
@@ -8,7 +7,9 @@ $nombreErr = "Por favor escribe tu nombre. Solo se permiten letras y espacios en
 $apellidosErr = "Por favor escribe tus apellidos. Solo se permiten letras y espacios en blanco";
 $paisErr = "Por favor, seleccione un pais";
 $preferenciasErr = "Por favor seleciona una preferencia";
-$nombre = $apellidos = $pais = $preferencias = $pelicula = $cine = $libros = "";
+$nombre = $apellidos = $pais = $pelicula = $cine = $libros = "";
+$preferencias = array();
+
 
 function test_input($data)
 {
@@ -18,7 +19,8 @@ function test_input($data)
   return $data;
 }
 
-$preferencias = array();
+// Convert array into string
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["nombre"])) {
@@ -40,19 +42,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       echo $apellidosErr;
     }
   }
-  if (isset($_POST['submit'])) {
-    if (!empty($_POST['pais'])) {
-      foreach ($_POST['pais'] as $selected) {
-        echo '  ' . $selected;
-      }
-    } else {
-      echo $preferenciasErr;
+
+
+
+
+  // Comprobacion -> Se ha seleccionado una opción¿?
+  if (isset($_POST["pais"])) {
+    // pais seleccionado -> Obtencion del valor de la opcion
+    $pais = $_POST["pais"];
+    // Visualizacion del pais seleccionado en función del valor devuelto.
+    switch ($pais) {
+      case 1: {
+          echo "España";
+        }
+        ;
+        break;
+      case 2: {
+          echo "Italia";
+        }
+        ;
+        break;
+      case 3: {
+          echo "Francia";
+        }
+        ;
+        break;
+      case 4: {
+          echo "Alemania";
+        }
+        ;
+        break;
+      case 5: {
+          echo "Portugal";
+        }
+        ;
+        break;
+      case 6: {
+          echo "Reino Unido";
+        }
+        ;
+        break;
     }
+  } else {
+    // No se ha seleccionado ninguna opcion
+    echo "$paisErr";
   }
 
-
-
-
-
-
+  if (isset($_POST["preferencias"])) {
+    $preferencias = array(); $preferencias = implode(", ", $preferencias); 
+    $preferencias = $_POST["preferencias"];
+    echo "Se han seleccionado " . count($preferencias) . " preferencias<br />";
+    echo "<ul>";
+    foreach ($preferencias as $preferencias) {
+      echo "<li>" . $preferencias . "</li>";
+    }
+    echo "</ul>";
+  } else {
+    echo $preferenciasErr;
+  }
 }

@@ -20,8 +20,6 @@ validar el formulario completamente.
 </style>
 <?php
 require_once("./funlib.php");
-// convert to string
-$preferencias = implode(', ', $preferencias);
 ?>
 
 <table border="1" solid black>
@@ -51,40 +49,52 @@ $preferencias = implode(', ', $preferencias);
         </tr>
         <tr>
             <td>Preferencias</td>
-            <td>
-                <?php echo $preferencias; ?>
+            <td><?php
+
+// Convert array into string
+echo $preferencias;
+
+            ?> </td>
             </td>
         </tr>
     </table>
     <br>
     <p><span class="error">* required field</span></p>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); "funlib.php"?>">
-        Nombre: <input type="text" Cine="nombre">
+
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
+    "funlib.php" ?>">
+        Nombre: <input type="text" name="nombre">
         <span class="error">*
             <?php echo $nombreErr; ?>
         </span>
         <br><br>
-        Apellidos: <input type="text" Cine="apellidos">
+        Apellidos: <input type="text" name="apellidos">
         <span class="error">*
             <?php echo $apellidosErr; ?>
         </span>
         <br><br>
-        Pais: <select nombre="pais">
+        Pais: <select name="pais">
             <option value="España">España</option>
             <option value="Francia">Francia</option>
             <option value="Italia">Italia</option>
             <option value="Alemania">Alemania</option>
             <option value="Portugal">Portugal</option>
             <option value="Reino Unido">Reino Unido</option>
-            <option value="Otro">Otro</option>
         </select>
         <span class="error">*
             <?php echo $paisErr; ?>
         </span>
         <br><br>
         <?php
-        $preferencias = array("Teatro", "Libros", "Cine");
-        foreach ($preferencias as $preferencia) {
-            echo "<input type='checkbox' name='preferencias[]' value='$preferencia'>$preferencia";
-        }
-        
+        $preferencias
+            ?>
+        <input type="checkbox" name="preferencias[]" value="Teatro">Teatro <br>
+        <input type="checkbox" name="preferencias[]" value="Libros">Libros <br>
+        <input type="checkbox" name="preferencias[]" value="Cine">Cine <br>
+        <span class="error">*
+            <?php echo $preferenciasErr; ?>
+        </span>
+        <br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</table>
