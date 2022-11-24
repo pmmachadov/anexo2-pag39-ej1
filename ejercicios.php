@@ -49,12 +49,20 @@ require_once("./funlib.php");
         </tr>
         <tr>
             <td>Preferencias</td>
-            <td><?php
+            <td>
+                <?php
 
-// Convert array into string
-echo $preferencias;
+            // Convert array into string
+            
+            if (isset($_POST["preferencias"])) {
+                $muestraPref = $_POST["preferencias"];
+            } else {
+                $muestraPref = [];
+            }
+            echo implode(",", $muestraPref);
 
-            ?> </td>
+            ?>
+            </td>
             </td>
         </tr>
     </table>
@@ -92,7 +100,9 @@ echo $preferencias;
         <input type="checkbox" name="preferencias[]" value="Libros">Libros <br>
         <input type="checkbox" name="preferencias[]" value="Cine">Cine <br>
         <span class="error">*
-            <?php echo $preferenciasErr; ?>
+            <?php if (!isset($preferenciasErr)) {
+                echo $preferenciasErr;
+            } ?>
         </span>
         <br><br>
         <input type="submit" name="submit" value="Submit">
