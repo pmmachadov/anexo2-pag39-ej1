@@ -22,16 +22,16 @@
         <td></td>
         </tr>
     </table>
-    <p><span class="error">* required field</span></p>
+    <p><span>* required field</span></p>
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);
 "funlib.php" ?>">
         Nombre: <input type="text" name="nombre">
-        <span class="error">*
+        <span>*
         </span>
         <br><br>
         Apellidos: <input type="text" name="apellidos">
-        <span class="error">*
+        <span>*
         </span>
         <br><br>
         Pais: <select name="pais">
@@ -42,13 +42,13 @@
             <option value="Portugal">Portugal</option>
             <option value="Reino Unido">Reino Unido</option>
         </select>
-        <span class="error">*
+        <span>*
         </span>
         <br><br>
         <input type="checkbox" name="preferencias[]" value="Teatro">Teatro <br>
         <input type="checkbox" name="preferencias[]" value="Libros">Libros <br>
         <input type="checkbox" name="preferencias[]" value="Cine">Cine <br>
-        <span class="error">*
+        <span>*
         </span>
         <br><br>
         <input type="submit" name="submit" value="Submit">
